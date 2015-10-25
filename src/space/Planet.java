@@ -7,16 +7,34 @@ import pixeng.Vector;
 
 public class Planet extends SpaceBody
 {
-	private Vector starpos;
-	private int dist;
+	private Star star;
+	private int dist, arc;
 	
-	private boolean lastkeypress = false;
-	
-	public Planet(String img, Vector star)
+	public Planet(String img, Star star, int dist, int arc)
 	{
 		super(img, "res/planets/" + img + ".png");
 		
-		this.starpos = star;
+		this.star = star;
+		this.dist = dist;
+		
+		this.arc = arc;
+		
+//		setPosition(
+//				new Vector(star.getPosition().getX() + dist, 0));
+//		setPosition(Transformation.RotateAbout(
+//				getPosition(),
+//				star.getPos(),
+//				arc));
+		
+		setPosition(new Vector(
+				dist, 0));
+		setPosition(Transformation.Translate(
+				getPosition(),
+				star.getPosition()));
+		setPosition(Transformation.RotateAbout(
+				getPosition(),
+				star.getPosition(),
+				arc));
 	}
 	
 	public void update()
@@ -25,29 +43,8 @@ public class Planet extends SpaceBody
 		
 		setPosition(Transformation.RotateAbout(
 				getPosition(),
-				this.starpos,
+				star.getPos(),
 				0.01F));
-		
-//		Vector dist = new Vector(
-//				Main.getPlayer().getPosition().getX() - getPosition().getX(),
-//				Main.getPlayer().getPosition().getY() - getPosition().getY());
-//		
-//		if((dist.getLength() < 1000 || dist.getLength() > -1000) && Main.getInputManager().keyDown(Settings.KEY_EXPLORE) && lastkeypress == false)
-//		{
-//			try 
-//			{
-//				Runtime.getRuntime().exec("java -jar TileGame.jar");
-//			} 
-//			catch (IOException e) 
-//			{
-//				e.printStackTrace();
-//			}
-//			lastkeypress = true;
-//			
-//			Main.pause();
-//		}
-//		if(!Main.getInputManager().keyDown(Settings.KEY_EXPLORE))
-//			lastkeypress = false;
 	}
 	
 	public void render(Graphics2D g)
@@ -55,9 +52,19 @@ public class Planet extends SpaceBody
 		super.render(g);
 	}
 	
-	public Vector getStarPos()
+	public Star getStar()
 	{
-		return starpos;
+		return star;
+	}
+	
+	public int getDist()
+	{
+		return dist;
+	}
+	
+	public int getArc()
+	{
+		return arc;
 	}
 	
 	public String getImg()

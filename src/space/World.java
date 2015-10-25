@@ -15,12 +15,12 @@ public class World
 	
 	public ArrayList<Territory> territory = new ArrayList<Territory>();
 	
-	private String [] texs = {
-			"planet_life",
-			"planet_snow",
-			"planet_water",
-			"planet_rock",
-			"planet_desert"
+	private Object[][] planetdata = {
+			{"planet_life",   30000, 40000},
+			{"planet_snow",   35000, 50000},
+			{"planet_water",  30000, 40000},
+			{"planet_rock",   20000, 65000},
+			{"planet_desert", 20000, 65000}
 	};
 	
 	public void gen()
@@ -35,18 +35,15 @@ public class World
 			
 			for(int p = 0;p < Math.round(Math.ceil(Math.random() * 10)); p++)
 			{
-				int tex = (int) Math.floor(Math.random() * 5);
+				int t = (int) Math.floor(Math.random() * 5);
 				
-				Planet planet = new Planet(texs[tex], star.getPosition());
-				planet.setPosition(new Vector(
-						(float) Math.ceil(Math.random() * 45000) + 15000, 0));
-				planet.setPosition(Transformation.Translate(
-						planet.getPosition(),
-						star.getPosition()));
-				planet.setPosition(Transformation.RotateAbout(
-						planet.getPosition(),
-						star.getPosition(),
-						(float) Math.ceil(Math.random() * 360)));
+				Planet planet = new Planet(
+						(String) planetdata[t][0], 
+						star, 
+						(int) Math.ceil(Math.random() * ((int) planetdata[t][2] - (int) planetdata[t][1])) + ((int) planetdata[t][1]), 
+						(int) Math.ceil(Math.random() * 360)
+				);
+
 				planets.add(planet);
 			}
 		}

@@ -55,9 +55,9 @@ public class Main extends Game
 		world = new World();
 		world.gen();
 		
-		new Territory(50, 50, Color.BLUE);
-		new Territory(49, 50, Color.GREEN);
-		new Territory(50, 49, Color.RED);
+//		new Territory(50, 50, Color.BLUE);
+//		new Territory(49, 50, Color.GREEN);
+//		new Territory(50, 49, Color.RED);
 		
 		player = new Player();
 		
