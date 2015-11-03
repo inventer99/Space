@@ -1,6 +1,8 @@
 package pixeng;
 
-public class Vector 
+import java.io.Serializable;
+
+public class Vector
 {
 	private float x;
 	private float y;

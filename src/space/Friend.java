@@ -2,17 +2,8 @@ package space;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
-
-import pixeng.Animation;
 import pixeng.PixEng;
-import pixeng.Settings;
-import pixeng.Vector;
 
 public class Friend extends Entity
 {

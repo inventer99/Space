@@ -11,6 +11,9 @@ import javax.imageio.ImageIO;
 
 import pixeng.Animation;
 import pixeng.PixEng;
+import space.ai.AI;
+import space.ai.AttackAI;
+import space.ai.FollowAI;
 
 public class Enemy extends Entity
 {
@@ -23,7 +26,7 @@ public class Enemy extends Entity
 	
 	private Ability[] abilitys = new Ability[20];
 	
-	private boolean tmp = false;
+//	private boolean tmp = false;
 	
 	private ArrayList<AI> ais = new ArrayList<AI>();
 	
@@ -45,8 +48,8 @@ public class Enemy extends Entity
 		
 		animation = new Animation(1000/4, images.size());
 		
-		ais.add(new AIFollow());
-		ais.add(new AIAttack());
+		ais.add(new FollowAI());
+		ais.add(new AttackAI());
 		
 		PixEng.addUpdateableObject(this);
 	}

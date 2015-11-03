@@ -2,10 +2,12 @@ package space;
 
 import java.util.ArrayList;
 
-import pixeng.Transformation;
 import pixeng.Vector;
+import space.body.Planet;
+import space.body.Star;
+import space.io.ReadWrite;
 
-public class World 
+public class World
 {
 	// Width: 1000000, from -500000 to 500000
 	// Height: 1000000, from -500000 to 500000
@@ -27,7 +29,7 @@ public class World
 	{
 		for(int s = 0;s < 100; s++)
 		{
-			Star star = new Star();
+			Star star = new Star("star_yellow");
 			star.setPosition(new Vector(
 					(float) Math.ceil(Math.random() * 1000000) - 500000,
 					(float) Math.ceil(Math.random() * 1000000) - 500000));
@@ -53,6 +55,30 @@ public class World
 	public void save()
 	{
 		System.out.println("Unimplemented");
+		
+		ReadWrite io = new ReadWrite();
+		
+		io.write();
+		
+//		try
+//		{
+//			IOObject ioobj = new IOObject();
+//			
+//			ioobj.player = ((Main) PixEng.getGame()).getPlayer();
+//			ioobj.stars = stars;
+//			ioobj.planets = planets;
+//			ioobj.territory = territory;
+//			
+//			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("./worlds/tmp.world"));
+//			
+//			oos.writeObject(ioobj);
+//			
+//			oos.close();
+//		}
+//		catch(IOException e)
+//		{
+//			e.printStackTrace();
+//		}
 		
 //		try
 //		{
@@ -149,6 +175,36 @@ public class World
 	public void load()
 	{		
 		System.out.println("Unimplemented");
+		
+//		try
+//		{
+//			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("./worlds/tmp.world"));
+//			
+//			IOObject ioobj = (IOObject) ois.readObject();
+//			
+//			((Main) PixEng.getGame()).setPlayer(ioobj.player);
+//			stars = ioobj.stars;
+//			planets = ioobj.planets;
+//			territory = ioobj.territory;
+//			
+//			ois.close();
+//		}
+//		catch(IOException | ClassNotFoundException e)
+//		{
+//			e.printStackTrace();
+//		}
+//		
+//		PixEng.getObjects().clear();
+//		
+//		{
+//			for(Territory t : territory)
+//				PixEng.addUpdateableObject(t);
+//			for(Star s : stars)
+//				PixEng.addUpdateableObject(s);
+//			for(Planet p : planets)
+//				PixEng.addUpdateableObject(p);
+//			PixEng.addUpdateableObject(((Main) PixEng.getGame()).getPlayer());
+//		}
 		
 //		try
 //		{

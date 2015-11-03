@@ -32,7 +32,7 @@ public class Player extends Entity
 	
 	private int chargePower = 0;
 	
-	private NetFriend f = new NetFriend();
+//	private NetFriend f = new NetFriend();
 	
 	public Player()
 	{
@@ -144,6 +144,15 @@ public class Player extends Entity
 			{
 				power--;
 				shield++;
+			}
+		}
+		
+		if(PixEng.getInputManager().keyDown(Settings.KEY_HEALTH))
+		{
+			if(power > 0 && health < 100)
+			{
+				power--;
+				health++;
 			}
 		}
 		

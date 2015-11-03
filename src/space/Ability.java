@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class Ability 
+public class Ability
 {
 	private Image img;
 	

@@ -1,0 +1,27 @@
+root					# World folder
+	sdata				# System Data
+		[id]			# ID of system
+			.bin		# System Bin
+			S[id].bin	# Star Bin
+			P[id].bin	# Planet Bin
+			B[id].bin	# Belt Bin
+			...			#
+		...				#
+	tdata				# Team Data
+		T[id].bin		# Team Bin
+		L[id].bin		# Territory Bin
+		...				#
+	adata				# Ability Data
+		[id].bin		# Ability Bin
+		...				#
+	edata				# Enemy Data
+		[id].bin		# Enemy Bin
+		...				#
+	fdata				# Friend Data
+		[id].bin		# Friend Bin
+		...				#
+	pdata.bin			# Player Bin
+	multi.log			# Multiplayer Log
+	
+# Anything with a .bak extention is for backup
+# Anything with a .lck extention is loaded by the game

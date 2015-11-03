@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import pixeng.PixEng;
-import space.main.Main;
 
 public class Territory extends Entity
 {

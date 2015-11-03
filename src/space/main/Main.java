@@ -1,19 +1,15 @@
 package space.main;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
 import pixeng.Game;
 import pixeng.PixEng;
 import pixeng.Settings;
-import pixeng.Vector;
-import space.Enemy;
-import space.Gui;
-import space.NetTestConnectionHandler;
 import space.Player;
-import space.StarBack;
-import space.Territory;
 import space.World;
+import space.body.StarBack;
+import space.net.handler.TestConnectionHandler;
+import space.ui.Gui;
 
 public class Main extends Game
 {
@@ -25,6 +21,11 @@ public class Main extends Game
 	public Player getPlayer()
 	{
 		return player;
+	}
+	
+	public void setPlayer(Player player)
+	{
+		this.player = player;
 	}
 	
 	public World getWorld()
@@ -39,14 +40,14 @@ public class Main extends Game
 		{
 //			PixEng.getServer().addListener(new NetPingHandler());
 //			PixEng.getServer().addListener(new NetFriendHandler());
-			PixEng.getClient().addListener(new NetTestConnectionHandler());
+			PixEng.getClient().addListener(new TestConnectionHandler());
 			PixEng.getServer().start(Settings.NET_PORT);
 		}
 		
 		if(Settings.NET_JOINING)
 		{
 //			PixEng.getClient().addListener(new NetFriendHandler());
-			PixEng.getClient().addListener(new NetTestConnectionHandler());
+			PixEng.getClient().addListener(new TestConnectionHandler());
 			PixEng.getClient().start(Settings.NET_HOST, Settings.NET_PORT);
 		}
 		
@@ -61,8 +62,8 @@ public class Main extends Game
 		
 		player = new Player();
 		
-		Enemy e1 = new Enemy();
-		e1.setPosition(new Vector(300, 300));
+//		Enemy e1 = new Enemy();
+//		e1.setPosition(new Vector(300, 300));
 		
 		new Gui();
 		
