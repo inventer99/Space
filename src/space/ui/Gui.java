@@ -7,6 +7,7 @@ import pixeng.PixEng;
 import pixeng.Settings;
 import pixeng.Updateable;
 import space.main.Main;
+import space.ui.base.event.EventCreator;
 
 public class Gui implements Updateable
 {
@@ -39,7 +40,7 @@ public class Gui implements Updateable
 	@Override
 	public void update()
 	{
-		updateMouse();
+		EventCreator.updateMouse();
 	}
 	
 	@Override
@@ -62,45 +63,5 @@ public class Gui implements Updateable
 		optionWindow.render(g);
 		
 		chatWindow.render(g);
-	}
-	
-	boolean stillDown = false;
-	
-	public void updateMouse()
-	{
-		if(PixEng.getInputManager().mouseDown(1) && !stillDown)
-		{
-			optionButton.mousePressed();
-			optionMenu.mousePressed();
-			optionWindow.mousePressed();
-			chatWindow.mousePressed();
-			
-			stillDown = true;
-		}
-		if(!PixEng.getInputManager().mouseDown(1) && stillDown)
-		{
-			optionWindow.mouseReleased();
-			chatWindow.mouseReleased();
-			
-			stillDown = false;
-		}
-		
-		if(
-				PixEng.getInputManager().mouseX() != PixEng.getInputManager().lastMouseX() &&
-				PixEng.getInputManager().mouseY() != PixEng.getInputManager().lastMouseY()	
-		)
-		{
-			if(stillDown)
-			{
-				optionWindow.mouseDragged();
-				chatWindow.mouseDragged();
-			}
-			else
-			{
-				// mouse moved
-			}
-			
-			PixEng.getInputManager().equalizeMouse();
-		}
 	}
 }
