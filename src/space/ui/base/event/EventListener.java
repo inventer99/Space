@@ -1,8 +1,5 @@
 package space.ui.base.event;
 
-import space.ui.base.event.types.KeyEvent;
-import space.ui.base.event.types.MouseEvent;
-
 public interface EventListener 
 {
 	public void KeyPressed(KeyEvent e);

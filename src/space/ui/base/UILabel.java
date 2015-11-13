@@ -4,23 +4,22 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 
-public class UIButton extends UIComp
+public class UILabel extends UIComp
 {
-	private boolean state = false;
 	private String text;
 	
-	public UIButton(String text)
+	public UILabel(String text)
 	{
 		this.text = text;
 	}
 	
-	public UIButton()
+	public UILabel()
 	{
 		this("");
 	}
 	
 	@Override
-	public void renderComp(Graphics2D g) 
+	public void renderComp(Graphics2D g)
 	{
 		Image i = new BufferedImage(this.bounds.width, this.bounds.height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D ig = (Graphics2D) i.getGraphics();
@@ -44,20 +43,5 @@ public class UIButton extends UIComp
 			);
 		}
 		g.drawImage(i, this.bounds.x, this.bounds.y, null);
-	}
-
-	public String getText() 
-	{
-		return text;
-	}
-
-	public void setText(String text) 
-	{
-		this.text = text;
-	}
-
-	public boolean getState() 
-	{
-		return state;
 	}
 }

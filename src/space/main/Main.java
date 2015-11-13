@@ -36,19 +36,23 @@ public class Main extends Game
 	@Override
 	public void init()
 	{		
-		if(Settings.NET_HOSTING)
+		if(Settings.NET_MULTI)
 		{
-//			PixEng.getServer().addListener(new NetPingHandler());
-//			PixEng.getServer().addListener(new NetFriendHandler());
-			PixEng.getClient().addListener(new TestConnectionHandler());
-			PixEng.getServer().start(Settings.NET_PORT);
-		}
-		
-		if(Settings.NET_JOINING)
-		{
-//			PixEng.getClient().addListener(new NetFriendHandler());
-			PixEng.getClient().addListener(new TestConnectionHandler());
-			PixEng.getClient().start(Settings.NET_HOST, Settings.NET_PORT);
+			if(Settings.NET_HOSTING)
+			{
+//				PixEng.getServer().addListener(new NetPingHandler());
+//				PixEng.getServer().addListener(new NetFriendHandler());
+				PixEng.getServer().addListener(new TestConnectionHandler());
+				PixEng.getServer().start(9989);
+//				PixEng.getServer().start(Settings.NET_PORT);
+			}
+			else
+			{
+//				PixEng.getClient().addListener(new NetFriendHandler());
+				PixEng.getClient().addListener(new TestConnectionHandler());
+				PixEng.getClient().start("localhost", 9989);
+//				PixEng.getClient().start(Settings.NET_HOST, Settings.NET_PORT);
+			}
 		}
 		
 		new StarBack();

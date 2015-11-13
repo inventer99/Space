@@ -6,17 +6,18 @@ import java.awt.Graphics2D;
 import space.ui.base.border.UIBorder;
 import space.ui.base.event.EventCreator;
 import space.ui.base.event.EventListener;
+import space.ui.base.layout.UIAbsoluteLayout;
 import space.ui.base.layout.UILayout;
 
 public abstract class UIComp 
 {
 	protected UIComp parent;
 	
-	protected UILayout bounds;
+	protected UILayout bounds = new UIAbsoluteLayout();
 	protected UIBorder border;
 	
 	protected Color foreground = Color.BLACK;
-	protected Color background = Color.WHITE;
+	protected Color background = new Color(0, 0, 0, 0);
 	
 	public abstract void renderComp(Graphics2D g);
 	

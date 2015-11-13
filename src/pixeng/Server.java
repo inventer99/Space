@@ -19,7 +19,7 @@ public class Server implements Runnable
 	{
 		port = p;
 		
-		t = new Thread(new Server(), "Server");
+		t = new Thread(this, "Server");
 		t.start();
 	}
 	
@@ -54,7 +54,7 @@ public class Server implements Runnable
 			e.printStackTrace();
 		}
 		
-		System.out.println("Server started");
+		System.out.println("Server started on port: " + port);
 	}
 	
 	public void disconnect()

@@ -30,7 +30,7 @@ public class Client implements Runnable
 		address = a;
 		port = p;
 		
-		t = new Thread(new Client(), "Client");
+		t = new Thread(this, "Client");
 		t.start();
 	}
 	
@@ -39,9 +39,9 @@ public class Client implements Runnable
 	{
 		connect();
 		
-		try
+		while(connected)
 		{
-			while(connected)
+			try
 			{
 				Object o = ois.readObject();
 				
@@ -53,17 +53,20 @@ public class Client implements Runnable
 								this.getConnection()
 						);
 				}
-				
-				if(s.isClosed())
-				{
-					disconnect();
-					connected = false;
-				}
 			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
+			catch(Exception e)
+			{
+				System.err.println("Connection Error in Update Loop!");
+				e.printStackTrace();
+				connected = false;
+			}
+			
+			
+			if(!s.isConnected())
+			{
+				disconnect();
+				connected = false;
+			}
 		}
 	}
 	
@@ -90,6 +93,7 @@ public class Client implements Runnable
 		}
 		catch(Exception e)
 		{
+			System.err.println("Connection Error in Connect!");
 			e.printStackTrace();
 		}
 	}
@@ -106,6 +110,7 @@ public class Client implements Runnable
 		}
 		catch(Exception e)
 		{
+			System.err.println("Connection Error in Disconnect!");
 			e.printStackTrace();
 		}
 	}

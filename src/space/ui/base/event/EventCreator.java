@@ -3,7 +3,6 @@ package space.ui.base.event;
 import java.util.ArrayList;
 
 import pixeng.PixEng;
-import space.ui.base.event.types.MouseEvent;
 
 public class EventCreator 
 {

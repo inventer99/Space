@@ -13,8 +13,8 @@ public class Settings
 	
 	public static boolean FULLSCREEN;
 	
+	public static boolean NET_MULTI;
 	public static boolean NET_HOSTING;
-	public static boolean NET_JOINING;
 	public static String NET_HOST;
 	public static int NET_PORT;
 	
@@ -69,8 +69,8 @@ public class Settings
 			HEIGHT = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 		}
 		
+		NET_MULTI = Boolean.parseBoolean(prop.getProperty("net.multi", "false"));
 		NET_HOSTING = Boolean.parseBoolean(prop.getProperty("net.hosting", "false"));
-		NET_JOINING = Boolean.parseBoolean(prop.getProperty("net.joining", "false"));
 		NET_HOST = prop.getProperty("net.host", "localhost");
 		NET_PORT = Integer.parseInt(prop.getProperty("net.port", "9989"));
 		

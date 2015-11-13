@@ -32,9 +32,9 @@ public class SClient implements Runnable
 	{
 		connect();
 		
-		try
+		while(connected)
 		{
-			while(connected)
+			try
 			{
 				Object o = ois.readObject();
 				
@@ -46,17 +46,19 @@ public class SClient implements Runnable
 								this.getConnection()
 						);
 				}
-				
-				if(s.isClosed())
-				{
-					disconnect();
-					connected = false;
-				}
 			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
+			catch(Exception e)
+			{
+				System.err.println("Connection Error in Update Loop! (" + s.getRemoteSocketAddress() + ")");
+				e.printStackTrace();
+				connected = false;
+			}
+			
+			if(!s.isConnected())
+			{
+				disconnect();
+				connected = false;
+			}
 		}
 		
 		disconnect();
