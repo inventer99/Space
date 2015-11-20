@@ -34,4 +34,9 @@ public class SpaceBody extends Entity
 	{
 		return renderkey;
 	}
+	
+	public void setRenderkey(String renderkey) 
+	{
+		this.renderkey = renderkey;
+	}
 }

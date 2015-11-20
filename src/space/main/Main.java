@@ -8,7 +8,7 @@ import pixeng.Settings;
 import space.Player;
 import space.World;
 import space.body.StarBack;
-import space.net.handler.TestConnectionHandler;
+import space.net.shared.TestConnectionHandler;
 import space.ui.Gui;
 
 public class Main extends Game

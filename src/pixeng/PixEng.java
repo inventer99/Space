@@ -50,6 +50,7 @@ public class PixEng implements Runnable
 		t.start();
 	}
 	
+	@SuppressWarnings("static-access")
 	@Override
 	public void run() 
 	{

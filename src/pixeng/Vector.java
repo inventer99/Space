@@ -1,7 +1,5 @@
 package pixeng;
 
-import java.io.Serializable;
-
 public class Vector
 {
 	private float x;

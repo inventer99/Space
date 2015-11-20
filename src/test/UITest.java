@@ -19,6 +19,7 @@ import space.ui.base.border.UIDuelBorder;
 import space.ui.base.border.UISolidBorder;
 import space.ui.base.layout.UIAbsoluteLayout;
 
+@SuppressWarnings("serial")
 public class UITest extends JFrame {
 
 	private JPanel contentPane;
@@ -79,7 +80,7 @@ public class UITest extends JFrame {
 			tp.add(pb, "Button");
 			
 			UIPanel pl = new UIPanel();
-			pl.setBounds(new UIAbsoluteLayout(10, 10, 450, 20));
+			pl.setBounds(new UIAbsoluteLayout(10, 40, 450, 20));
 			{
 				UILabel l = new UILabel("Text cannot 英語");
 				l.setBounds(new UIAbsoluteLayout(0, 0, 100, 20));

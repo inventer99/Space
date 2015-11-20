@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class Window extends JFrame
 {
 	public Window()
