@@ -24,4 +24,3 @@ root					# World folder
 	multi.log			# Multiplayer Log
 	
 # Anything with a .bak extention is for backup
-# Anything with a .lck extention is loaded by the game

@@ -2,7 +2,7 @@ package space.ui;
 
 import java.awt.Graphics2D;
 
-import pixeng.PixEng;
+import pixgen.PixGen;
 
 public class OptionButton
 {
@@ -16,8 +16,8 @@ public class OptionButton
 	
 	public void mousePressed()
 	{
-		int mx = PixEng.getInputManager().mouseX();
-		int my = PixEng.getInputManager().mouseY();
+		int mx = PixGen.getInputManager().mouseX();
+		int my = PixGen.getInputManager().mouseY();
 		
 		if((mx > x && mx < x + 60) && (my > y && my < y + 20))
 			Gui.drawOptionMenu = !Gui.drawOptionMenu;

@@ -2,7 +2,7 @@ package space;
 
 import java.util.ArrayList;
 
-import pixeng.Vector;
+import pixgen.Vector;
 import space.body.Planet;
 import space.body.Star;
 import space.io.ReadWrite;

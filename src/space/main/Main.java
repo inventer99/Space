@@ -1,15 +1,17 @@
 package space.main;
 
+import static pixgen.PixGen.getClient;
+import static pixgen.PixGen.getServer;
+import static pixgen.PixGen.startGame;
+
 import java.awt.Graphics2D;
 
-import pixeng.Game;
-import pixeng.PixEng;
-import pixeng.Settings;
+import pixgen.Game;
+import pixgen.Settings;
 import space.Player;
 import space.World;
 import space.body.StarBack;
 import space.net.shared.TestConnectionHandler;
-import space.ui.Gui;
 
 public class Main extends Game
 {
@@ -40,18 +42,18 @@ public class Main extends Game
 		{
 			if(Settings.NET_HOSTING)
 			{
-//				PixEng.getServer().addListener(new NetPingHandler());
-//				PixEng.getServer().addListener(new NetFriendHandler());
-				PixEng.getServer().addListener(new TestConnectionHandler());
-				PixEng.getServer().start(9989);
+//				getServer().addListener(new NetPingHandler());
+//				getServer().addListener(new NetFriendHandler());
+				getServer().addListener(new TestConnectionHandler());
+				getServer().start(9989);
 //				PixEng.getServer().start(Settings.NET_PORT);
 			}
 			else
 			{
-//				PixEng.getClient().addListener(new NetFriendHandler());
-				PixEng.getClient().addListener(new TestConnectionHandler());
-				PixEng.getClient().start("localhost", 9989);
-//				PixEng.getClient().start(Settings.NET_HOST, Settings.NET_PORT);
+//				getClient().addListener(new NetFriendHandler());
+				getClient().addListener(new TestConnectionHandler());
+				getClient().start("localhost", 9989);
+//				getClient().start(Settings.NET_HOST, Settings.NET_PORT);
 			}
 		}
 		
@@ -69,7 +71,7 @@ public class Main extends Game
 //		Enemy e1 = new Enemy();
 //		e1.setPosition(new Vector(300, 300));
 		
-		new Gui();
+//		new Gui();
 		
 		splash.Delete();
 	}
@@ -87,6 +89,6 @@ public class Main extends Game
 	{
 		splash = new Splash();
 		
-		PixEng.start(new Main());
+		startGame(new Main());
 	}
 }

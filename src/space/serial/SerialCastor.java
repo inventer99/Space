@@ -1,6 +1,6 @@
 package space.serial;
 
-import pixeng.Vector;
+import pixgen.Vector;
 import space.Enemy;
 import space.Entity;
 import space.Friend;
@@ -149,7 +149,8 @@ public class SerialCastor
 	public static SpaceBody cast(SerialSpaceBody obj)
 	{
 		return new SpaceBody(
-				"", obj.renderkey
+				"", 
+				obj.renderkey
 		);
 	}
 	
@@ -185,7 +186,10 @@ public class SerialCastor
 	// SerialVector to Vector
 	public static Vector cast(SerialVector obj)
 	{
-		return new Vector(obj.x, obj.y);
+		return new Vector(
+				obj.x, 
+				obj.y
+		);
 	}
 	
 	// Vector to SerialVector

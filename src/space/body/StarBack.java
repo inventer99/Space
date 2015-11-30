@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import pixeng.PixEng;
-import pixeng.Settings;
-import pixeng.Vector;
+import pixgen.PixGen;
+import pixgen.Settings;
+import pixgen.Vector;
 import space.Entity;
 
 public class StarBack extends Entity 
@@ -36,43 +36,43 @@ public class StarBack extends Entity
 		for(int i = 0;i < tmp;i++)
 		{
 			Vector v = new Vector(0, 0);
-			v.setX((float) Math.ceil(Math.random() * Settings.WIDTH) - PixEng.getPosition().getX());
-			v.setY((float) Math.ceil(Math.random() * Settings.HEIGHT) - PixEng.getPosition().getY());
+			v.setX((float) Math.ceil(Math.random() * Settings.WIDTH) - PixGen.getViewPoint().getX());
+			v.setY((float) Math.ceil(Math.random() * Settings.HEIGHT) - PixGen.getViewPoint().getY());
 			points.add(v);
 		}
 		
-		PixEng.addUpdateableObject(this);
+		PixGen.addUpdateableObject(this);
 	}
 	
 	public void update()
 	{		
-		setPosition(PixEng.getPosition());
+		setPosition(PixGen.getViewPoint());
 		super.update();
 		for(Vector v : points)
 		{
-			if(v.getX() < -PixEng.getPosition().getX())
+			if(v.getX() < -PixGen.getViewPoint().getX())
 			{
-				float offset = v.getX() - -PixEng.getPosition().getX();
-				v.setX(-PixEng.getPosition().getX() + Settings.WIDTH + offset);
-				v.setY((float) Math.ceil(Math.random() * Settings.HEIGHT) - PixEng.getPosition().getY());
+				float offset = v.getX() - -PixGen.getViewPoint().getX();
+				v.setX(-PixGen.getViewPoint().getX() + Settings.WIDTH + offset);
+				v.setY((float) Math.ceil(Math.random() * Settings.HEIGHT) - PixGen.getViewPoint().getY());
 			}
-			if(v.getY() < -PixEng.getPosition().getY())
+			if(v.getY() < -PixGen.getViewPoint().getY())
 			{
-				float offset = v.getY() - -PixEng.getPosition().getY();
-				v.setX((float) Math.ceil(Math.random() * Settings.WIDTH) - PixEng.getPosition().getX());
-				v.setY(-PixEng.getPosition().getY() + Settings.HEIGHT + offset);
+				float offset = v.getY() - -PixGen.getViewPoint().getY();
+				v.setX((float) Math.ceil(Math.random() * Settings.WIDTH) - PixGen.getViewPoint().getX());
+				v.setY(-PixGen.getViewPoint().getY() + Settings.HEIGHT + offset);
 			}
-			if(v.getX() > Settings.WIDTH + -PixEng.getPosition().getX())
+			if(v.getX() > Settings.WIDTH + -PixGen.getViewPoint().getX())
 			{
-				float offset = v.getX() - (Settings.WIDTH + -PixEng.getPosition().getX());
-				v.setX(-PixEng.getPosition().getX() + offset);
-				v.setY((float) Math.ceil(Math.random() * Settings.HEIGHT) - PixEng.getPosition().getY());
+				float offset = v.getX() - (Settings.WIDTH + -PixGen.getViewPoint().getX());
+				v.setX(-PixGen.getViewPoint().getX() + offset);
+				v.setY((float) Math.ceil(Math.random() * Settings.HEIGHT) - PixGen.getViewPoint().getY());
 			}
-			if(v.getY() > Settings.HEIGHT + -PixEng.getPosition().getY())
+			if(v.getY() > Settings.HEIGHT + -PixGen.getViewPoint().getY())
 			{
-				float offset = v.getY() - (Settings.HEIGHT + -PixEng.getPosition().getY());
-				v.setX((float) Math.ceil(Math.random() * Settings.WIDTH) - PixEng.getPosition().getX());
-				v.setY(-PixEng.getPosition().getY() + offset);
+				float offset = v.getY() - (Settings.HEIGHT + -PixGen.getViewPoint().getY());
+				v.setX((float) Math.ceil(Math.random() * Settings.WIDTH) - PixGen.getViewPoint().getX());
+				v.setY(-PixGen.getViewPoint().getY() + offset);
 			}
 		}
 	}

@@ -2,8 +2,8 @@ package space.net.shared;
 
 import java.io.IOException;
 
-import pixeng.Connection;
-import pixeng.NetListener;
+import pixgen.Connection;
+import pixgen.NetListener;
 
 public class TestConnectionHandler implements NetListener
 {

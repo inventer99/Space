@@ -2,7 +2,7 @@ package space.ui.base.event;
 
 import java.util.ArrayList;
 
-import pixeng.PixEng;
+import pixgen.PixGen;
 
 public class EventCreator 
 {
@@ -29,13 +29,13 @@ public class EventCreator
 	
 	public static void updateMouse()
 	{
-		if(PixEng.getInputManager().mouseDown(1) && !mStillDown)
+		if(PixGen.getInputManager().mouseDown(1) && !mStillDown)
 		{
 			new MouseEvent(); // Pressed
 			
 			mStillDown = true;
 		}
-		if(!PixEng.getInputManager().mouseDown(1) && mStillDown)
+		if(!PixGen.getInputManager().mouseDown(1) && mStillDown)
 		{
 			new MouseEvent(); // Released
 			
@@ -43,8 +43,8 @@ public class EventCreator
 		}
 		
 		if(
-				PixEng.getInputManager().mouseX() != PixEng.getInputManager().lastMouseX() &&
-				PixEng.getInputManager().mouseY() != PixEng.getInputManager().lastMouseY()	
+				PixGen.getInputManager().mouseX() != PixGen.getInputManager().lastMouseX() &&
+				PixGen.getInputManager().mouseY() != PixGen.getInputManager().lastMouseY()	
 		)
 		{
 			if(mStillDown) 
@@ -56,7 +56,7 @@ public class EventCreator
 				new MouseEvent(); // Moved
 			}
 			
-			PixEng.getInputManager().equalizeMouse();
+			PixGen.getInputManager().equalizeMouse();
 		}
 	}
 }

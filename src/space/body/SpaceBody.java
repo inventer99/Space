@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-import pixeng.PixEng;
+import pixgen.PixGen;
 import space.Entity;
 
 public class SpaceBody extends Entity
@@ -14,9 +14,9 @@ public class SpaceBody extends Entity
 	public SpaceBody(String imgkey, String path)
 	{
 		renderkey = imgkey;
-		PixEng.getImageManager().addImage(imgkey, path);
+		PixGen.getImageManager().addImage(imgkey, path);
 		
-		PixEng.addUpdateableObject(this);
+		PixGen.addUpdateableObject(this);
 	}
 	
 	public void update()
@@ -26,7 +26,7 @@ public class SpaceBody extends Entity
 	
 	public void render(Graphics2D g)
 	{
-		Image image = PixEng.getImageManager().getImage(getRenderkey());
+		Image image = PixGen.getImageManager().getImage(getRenderkey());
 		((Graphics) g).drawImage(image, Math.round(getRenderpos().getX() - image.getWidth(null) * 3 / 2), Math.round(getRenderpos().getY() - image.getHeight(null) * 3 / 2), image.getWidth(null) * 3, image.getHeight(null) * 3, null);
 	}
 

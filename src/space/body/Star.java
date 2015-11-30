@@ -2,7 +2,7 @@ package space.body;
 
 import java.awt.Graphics2D;
 
-import pixeng.Vector;
+import pixgen.Vector;
 
 public class Star extends SpaceBody
 {	

@@ -2,8 +2,8 @@ package space.body;
 
 import java.awt.Graphics2D;
 
-import pixeng.Transformation;
-import pixeng.Vector;
+import pixgen.Transformation;
+import pixgen.Vector;
 
 public class Planet extends SpaceBody
 {

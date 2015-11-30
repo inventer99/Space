@@ -2,9 +2,9 @@ package space;
 
 import java.awt.Graphics2D;
 
-import pixeng.PixEng;
-import pixeng.Updateable;
-import pixeng.Vector;
+import pixgen.PixGen;
+import pixgen.Updateable;
+import pixgen.Vector;
 
 public class Entity implements Updateable
 {
@@ -22,7 +22,10 @@ public class Entity implements Updateable
 	@Override
 	public void update() 
 	{
-		renderpos = new Vector(PixEng.getPosition().getX() + position.getX(), PixEng.getPosition().getY() + position.getY());
+		renderpos = new Vector(
+				PixGen.getViewPoint().getX() + position.getX(), 
+				PixGen.getViewPoint().getY() + position.getY()
+		);
 	}
 
 	@Override

@@ -2,8 +2,8 @@ package space.ui;
 
 import java.awt.Graphics2D;
 
-import pixeng.PixEng;
-import pixeng.Settings;
+import pixgen.PixGen;
+import pixgen.Settings;
 
 public class ChatWindow
 {
@@ -21,8 +21,8 @@ public class ChatWindow
 	
 	public void mousePressed()
 	{
-		int mx = PixEng.getInputManager().mouseX();
-		int my = PixEng.getInputManager().mouseY();
+		int mx = PixGen.getInputManager().mouseX();
+		int my = PixGen.getInputManager().mouseY();
 		
 		if(Gui.drawChatWindow)
 		{
@@ -40,8 +40,8 @@ public class ChatWindow
 	
 	public void mouseDragged()
 	{
-		int mx = PixEng.getInputManager().mouseX();
-		int my = PixEng.getInputManager().mouseY();
+		int mx = PixGen.getInputManager().mouseX();
+		int my = PixGen.getInputManager().mouseY();
 		
 		if(Gui.drawChatWindow)
 		{
@@ -84,12 +84,12 @@ public class ChatWindow
 			g.drawRect(x, y, 400, 200);
 		}
 		
-		if(PixEng.getInputManager().keyDown(Settings.KEY_CHAT) && lastkeypress == false)
+		if(PixGen.getInputManager().keyDown(Settings.KEY_CHAT) && lastkeypress == false)
 		{
 			Gui.drawChatWindow = !Gui.drawChatWindow;
 			lastkeypress = true;
 		}
-		if(!PixEng.getInputManager().keyDown(Settings.KEY_CHAT))
+		if(!PixGen.getInputManager().keyDown(Settings.KEY_CHAT))
 			lastkeypress = false;
 	}
 }

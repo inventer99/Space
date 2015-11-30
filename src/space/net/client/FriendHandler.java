@@ -2,9 +2,9 @@ package space.net.client;
 
 import java.io.IOException;
 
-import pixeng.Connection;
-import pixeng.NetListener;
-import pixeng.PixEng;
+import pixgen.Connection;
+import pixgen.NetListener;
+import pixgen.PixGen;
 import space.Friend;
 import space.serial.SerialCastor;
 import space.serial.SerialFriend;
@@ -18,7 +18,7 @@ public class FriendHandler implements NetListener
 	{
 		f = new Friend();
 		
-		PixEng.addUpdateableObject(f);
+		PixGen.addUpdateableObject(f);
 	}
 
 	@Override

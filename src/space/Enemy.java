@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import pixeng.Animation;
-import pixeng.PixEng;
+import pixgen.Animation;
+import pixgen.PixGen;
 import space.ai.AI;
 import space.ai.AttackAI;
 import space.ai.FollowAI;
@@ -51,7 +51,7 @@ public class Enemy extends Entity
 		ais.add(new FollowAI());
 		ais.add(new AttackAI());
 		
-		PixEng.addUpdateableObject(this);
+		PixGen.addUpdateableObject(this);
 	}
 	
 	public void update() 

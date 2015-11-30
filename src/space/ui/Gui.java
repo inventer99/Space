@@ -3,11 +3,10 @@ package space.ui;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import pixeng.PixEng;
-import pixeng.Settings;
-import pixeng.Updateable;
+import pixgen.PixGen;
+import pixgen.Settings;
+import pixgen.Updateable;
 import space.main.Main;
-import space.ui.base.event.EventCreator;
 
 public class Gui implements Updateable
 {
@@ -34,23 +33,63 @@ public class Gui implements Updateable
 	
 	public Gui()
 	{
-		PixEng.addUpdateableObject(this);
+		PixGen.addUpdateableObject(this);
 	}
+	
+	private static boolean mStillDown = false;
 	
 	@Override
 	public void update()
 	{
-		EventCreator.updateMouse();
+//		EventCreator.updateMouse();
+		
+		if(PixGen.getInputManager().mouseDown(1) && !mStillDown)
+		{
+			// Pressed
+			optionButton.mousePressed();
+			optionMenu.mousePressed();
+			optionWindow.mousePressed();
+			chatWindow.mousePressed();
+			
+			mStillDown = true;
+		}
+		if(!PixGen.getInputManager().mouseDown(1) && mStillDown)
+		{
+			// Released
+			optionWindow.mouseReleased();
+			chatWindow.mouseReleased();
+			
+			mStillDown = false;
+		}
+		
+		if(
+				PixGen.getInputManager().mouseX() != PixGen.getInputManager().lastMouseX() &&
+				PixGen.getInputManager().mouseY() != PixGen.getInputManager().lastMouseY()	
+		)
+		{
+			if(mStillDown) 
+			{
+				// Dragged
+				optionWindow.mouseDragged();
+				chatWindow.mouseReleased();
+			}
+			else
+			{
+				// Moved
+			}
+			
+			PixGen.getInputManager().equalizeMouse();
+		}
 	}
 	
 	@Override
 	public void render(Graphics2D g)
 	{	
-		healthBar.render(((Main) PixEng.getGame()).getPlayer().getHealth(), g);
+		healthBar.render(((Main) PixGen.getGame()).getPlayer().getHealth(), g);
 		
-		shieldBar.render(((Main) PixEng.getGame()).getPlayer().getShield(), g);
+		shieldBar.render(((Main) PixGen.getGame()).getPlayer().getShield(), g);
 		
-		powerBar.render(((Main) PixEng.getGame()).getPlayer().getPower(), g);
+		powerBar.render(((Main) PixGen.getGame()).getPlayer().getPower(), g);
 		
 		abilityBar.render(g);
 		

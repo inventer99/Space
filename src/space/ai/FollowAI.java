@@ -1,7 +1,7 @@
 package space.ai;
 
-import pixeng.PixEng;
-import pixeng.Vector;
+import pixgen.PixGen;
+import pixgen.Vector;
 import space.Entity;
 import space.main.Main;
 
@@ -33,7 +33,7 @@ public class FollowAI implements AI
 		updatePP++;
 		if(updatePP > 60)
 		{
-			playerPos = ((Main) PixEng.getGame()).getPlayer().getPosition();
+			playerPos = ((Main) PixGen.getGame()).getPlayer().getPosition();
 			currentDist = new Vector(playerPos.getX() - e.getPosition().getX(), playerPos.getY() - e.getPosition().getY());
 			startDist = new Vector(playerPos.getX() - startPos.getX(), playerPos.getY() - startPos.getY());
 			hStartDistX = startDist.getX() / 2;

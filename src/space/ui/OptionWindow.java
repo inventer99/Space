@@ -2,8 +2,8 @@ package space.ui;
 
 import java.awt.Graphics2D;
 
-import pixeng.PixEng;
-import pixeng.Settings;
+import pixgen.PixGen;
+import pixgen.Settings;
 
 public class OptionWindow
 	{
@@ -20,8 +20,8 @@ public class OptionWindow
 		
 		public void mousePressed()
 		{
-			int mx = PixEng.getInputManager().mouseX();
-			int my = PixEng.getInputManager().mouseY();
+			int mx = PixGen.getInputManager().mouseX();
+			int my = PixGen.getInputManager().mouseY();
 			
 			if(Gui.drawOptionWindow)
 			{
@@ -62,8 +62,8 @@ public class OptionWindow
 		
 		public void mouseDragged()
 		{
-			int mx = PixEng.getInputManager().mouseX();
-			int my = PixEng.getInputManager().mouseY();
+			int mx = PixGen.getInputManager().mouseX();
+			int my = PixGen.getInputManager().mouseY();
 			
 			if(Gui.drawOptionWindow)
 			{

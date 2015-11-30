@@ -2,7 +2,7 @@ package space.ui;
 
 import java.awt.Graphics2D;
 
-import pixeng.PixEng;
+import pixgen.PixGen;
 import space.main.Main;
 
 public class OptionMenu
@@ -19,17 +19,17 @@ public class OptionMenu
 	
 	public void mousePressed()
 	{
-		int mx = PixEng.getInputManager().mouseX();
-		int my = PixEng.getInputManager().mouseY();
+		int mx = PixGen.getInputManager().mouseX();
+		int my = PixGen.getInputManager().mouseY();
 		
 		if(Gui.drawOptionMenu)
 		{
 			if((mx > x && mx < x + 75) && (my > y + 0 && my < y + 20))
-				((Main) PixEng.getGame()).getWorld().save();
+				((Main) PixGen.getGame()).getWorld().save();
 			if((mx > x && mx < x + 75) && (my > y + 20 && my < y + 40))
 				Gui.drawOptionWindow = true;
 			if((mx > x && mx < x + 75) && (my > y + 40 && my < y + 60))
-				((Main) PixEng.getGame()).getWorld().load();
+				((Main) PixGen.getGame()).getWorld().load();
 			if((mx > x && mx < x + 75) && (my > y + 60 && my < y + 80))
 				System.out.println("World 2 clicked");
 			if((mx > x && mx < x + 75) && (my > y + 80 && my < y + 100))
@@ -65,12 +65,12 @@ public class OptionMenu
 			g.drawRect(x, y, 75, 160);
 		}
 		
-		if(PixEng.getInputManager().keyDown(27) && lastkeypress == false)
+		if(PixGen.getInputManager().keyDown(27) && lastkeypress == false)
 		{
 			Gui.drawOptionMenu = !Gui.drawOptionMenu;
 			lastkeypress = true;
 		}
-		if(!PixEng.getInputManager().keyDown(27))
+		if(!PixGen.getInputManager().keyDown(27))
 			lastkeypress = false;
 	}
 }

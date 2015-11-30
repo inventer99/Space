@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import pixeng.PixEng;
+import pixgen.PixGen;
 
 public class Selector extends Entity
 {
@@ -25,7 +25,7 @@ public class Selector extends Entity
 			e.printStackTrace();
 		}
 		
-		PixEng.addUpdateableObject(this);
+		PixGen.addUpdateableObject(this);
 	}
 	
 	public void update()

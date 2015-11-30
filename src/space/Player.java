@@ -1,5 +1,6 @@
 package space;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -9,26 +10,19 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
-import pixeng.Animation;
-import pixeng.PixEng;
-import pixeng.Settings;
-import pixeng.Vector;
+import pixgen.Animation;
+import pixgen.PixGen;
+import pixgen.Settings;
+import pixgen.Vector;
 
-public class Player extends Entity
+public class Player extends PlayableEntity
 {
 	private ArrayList<Image> images = new ArrayList<Image>();
 	private Animation animation;
 	
-	private int health = 100;
-	private int shield = 100;
-	private int power = 100;
-	
-	private int holdTimeXp;
-	private int holdTimeXm;
-	private int holdTimeYp;
-	private int holdTimeYm;
-	
-	private Ability[] abilitys = new Ability[20];
+	private final int acceleration = 1;
+	private final int maxSpeed = acceleration * 100;
+	private Vector velocity;
 	
 	private int chargePower = 0;
 	
@@ -39,7 +33,8 @@ public class Player extends Entity
 		for(int i = 0;i < abilitys.length;i++)
 			abilitys[i] = new Ability("res/abilities/bomb.png");
 		
-		this.setPosition(new Vector((Settings.WIDTH / 2) - 45, (Settings.HEIGHT / 2) - 60));
+//		this.setPosition(new Vector((Settings.WIDTH / 2) - 45, (Settings.HEIGHT / 2) - 60));
+		velocity = new Vector(0, 0);
 		
 		try 
 		{
@@ -55,78 +50,51 @@ public class Player extends Entity
 		
 		animation = new Animation(1000/4, images.size());
 		
-		PixEng.addUpdateableObject(this);
+		PixGen.addUpdateableObject(this);
 	}
 	
 	public void update() 
 	{	
-		if(PixEng.getInputManager().keyDown(Settings.KEY_UP))
+		if(PixGen.getInputManager().keyDown(Settings.KEY_UP))
+			velocity.sub(new Vector(0, acceleration));
+		if(PixGen.getInputManager().keyDown(Settings.KEY_DOWN))
+			velocity.add(new Vector(0, acceleration));
+		if(PixGen.getInputManager().keyDown(Settings.KEY_RIGHT))
+			velocity.add(new Vector(acceleration, 0));
+		if(PixGen.getInputManager().keyDown(Settings.KEY_LEFT))
+			velocity.sub(new Vector(acceleration, 0));
+		
+		if(PixGen.getInputManager().keyDown(Settings.KEY_STOP))
 		{
-			PixEng.getPosition().add(new Vector(0, 5 + (float) (holdTimeYp * 0.1)));
-			getPosition().add(new Vector(0, 5 - (float) (holdTimeYp * 0.1)));
-			if(holdTimeYm > 0) holdTimeYm--;
-			else holdTimeYp++;
-		}
-		if(PixEng.getInputManager().keyDown(Settings.KEY_DOWN))
-		{
-			PixEng.getPosition().add(new Vector(0, -5 - (float) (holdTimeYm * 0.1)));
-			getPosition().add(new Vector(0, -5 + (float) (holdTimeYm * 0.1)));
-			if(holdTimeYp > 0) holdTimeYp--;
-			else holdTimeYm++;
-		}
-		if(PixEng.getInputManager().keyDown(Settings.KEY_LEFT))
-		{
-			PixEng.getPosition().add(new Vector(5 + (float) (holdTimeXp * 0.1), 0));
-			getPosition().add(new Vector(5 - (float) (holdTimeXp * 0.1), 0));
-			if(holdTimeXm > 0)holdTimeXm--;
-			else holdTimeXp++;
-		}
-		if(PixEng.getInputManager().keyDown(Settings.KEY_RIGHT))
-		{
-			PixEng.getPosition().add(new Vector(-5 - (float) (holdTimeXm * 0.1), 0));
-			getPosition().add(new Vector(-5 + (float) (holdTimeXm * 0.1), 0));
-			if(holdTimeXp > 0) holdTimeXp--;
-			else holdTimeXm++;
+			Vector cancel = new Vector(
+					velocity.getX() == 0
+					? 0 :
+					(
+						(velocity.getX() > 0)
+						? acceleration : -acceleration
+					), 
+					velocity.getY() == 0
+					? 0 :
+					(
+						(velocity.getY() > 0)
+						? acceleration : -acceleration
+					)
+			);
+			velocity.sub(cancel);
+			
+			// Remove any left over values from Normalization
+			if(velocity.getLength() < 1)
+				velocity.mul(new Vector(0, 0));
 		}
 		
-		if(holdTimeXm >= 0 && !PixEng.getInputManager().keyDown(Settings.KEY_RIGHT))
+		if(velocity.getLength() > maxSpeed)
 		{
-			PixEng.getPosition().add(new Vector(-5 - (float) (holdTimeXm * 0.1), 0));
-			getPosition().add(new Vector(-5 + (float) (holdTimeXm * 0.1), 0));
-		}
-		if(holdTimeXp >= 0 && !PixEng.getInputManager().keyDown(Settings.KEY_LEFT))
-		{
-			PixEng.getPosition().add(new Vector(5 + (float) (holdTimeXp * 0.1), 0));
-			getPosition().add(new Vector(5 - (float) (holdTimeXp * 0.1), 0));
-		}
-		if(holdTimeYp >= 0 && !PixEng.getInputManager().keyDown(Settings.KEY_UP))
-		{
-			PixEng.getPosition().add(new Vector(0, 5 + (float) (holdTimeYp * 0.1)));
-			getPosition().add(new Vector(0, 5 - (float) (holdTimeYp * 0.1)));
-		}
-		if(holdTimeYm >= 0 && !PixEng.getInputManager().keyDown(Settings.KEY_DOWN))
-		{
-			PixEng.getPosition().add(new Vector(0, -5 - (float) (holdTimeYm * 0.1)));
-			getPosition().add(new Vector(0, -5 + (float) (holdTimeYm * 0.1)));
+			velocity.normalize();
+			velocity.mul(new Vector(maxSpeed, maxSpeed));
 		}
 		
-		if(PixEng.getInputManager().keyDown(Settings.KEY_STOP))
-		{
-			holdTimeXp--;
-			holdTimeXm--;
-			holdTimeYp--;
-			holdTimeYm--;
-		}
-		
-		if(holdTimeXp > 1000) holdTimeXp = 1000;
-		if(holdTimeXm > 1000) holdTimeXm = 1000;
-		if(holdTimeYp > 1000) holdTimeYp = 1000;
-		if(holdTimeYm > 1000) holdTimeYm = 1000;
-		
-		if(holdTimeXp < 0) holdTimeXp = 0;
-		if(holdTimeXm < 0) holdTimeXm = 0;
-		if(holdTimeYp < 0) holdTimeYp = 0;
-		if(holdTimeYm < 0) holdTimeYm = 0;
+		getPosition().add(velocity);
+		PixGen.setViewPoint(getPosition());
 			
 		super.update();
 		
@@ -138,7 +106,7 @@ public class Player extends Entity
 			chargePower = 0;
 		}
 		
-		if(PixEng.getInputManager().keyDown(Settings.KEY_SHIELD))
+		if(PixGen.getInputManager().keyDown(Settings.KEY_SHIELD))
 		{
 			if(power > 0 && shield < 100)
 			{
@@ -147,7 +115,7 @@ public class Player extends Entity
 			}
 		}
 		
-		if(PixEng.getInputManager().keyDown(Settings.KEY_HEALTH))
+		if(PixGen.getInputManager().keyDown(Settings.KEY_HEALTH))
 		{
 			if(power > 0 && health < 100)
 			{
@@ -188,45 +156,8 @@ public class Player extends Entity
 	public void render(Graphics2D g)
 	{
 		((Graphics) g).drawImage(images.get(animation.getIndex()), Math.round(getRenderpos().getX()), Math.round(getRenderpos().getY()), 90, 120, null);
-	}
-	
-	public int getHealth() 
-	{
-		return health;
-	}
-
-	public void setHealth(int health) 
-	{
-		this.health = health;
-	}
-
-	public int getShield() 
-	{
-		return shield;
-	}
-
-	public void setShield(int shield) 
-	{
-		this.shield = shield;
-	}
-
-	public int getPower() 
-	{
-		return power;
-	}
-
-	public void setPower(int power) 
-	{
-		this.power = power;
-	}
-
-	public Ability[] getAbilitys() 
-	{
-		return abilitys;
-	}
-
-	public void setAbilitys(Ability[] abilitys) 
-	{
-		this.abilitys = abilitys;
+		g.setColor(Color.GREEN);
+		g.drawLine(200, 200, Math.round(200 + velocity.getX()), Math.round(200 + velocity.getY()));
+		g.drawOval(100, 100, 200, 200);
 	}
 }

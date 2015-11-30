@@ -2,10 +2,10 @@ package space.net.server;
 
 import java.io.IOException;
 
-import pixeng.Connection;
-import pixeng.NetListener;
-import pixeng.PixEng;
-import pixeng.SClient;
+import pixgen.Connection;
+import pixgen.NetListener;
+import pixgen.PixGen;
+import pixgen.SClient;
 import space.serial.SerialFriend;
 
 public class PingHandler implements NetListener
@@ -21,7 +21,7 @@ public class PingHandler implements NetListener
 	{
 		if(object instanceof SerialFriend)
 		{	
-			for(SClient c : PixEng.getServer().getSClient())
+			for(SClient c : PixGen.getServer().getSClient())
 			{
 				c.getConnection().oos.writeObject(object);
 			}

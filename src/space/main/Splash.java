@@ -9,14 +9,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- * 
- * @author inventer99
- *
- *	A simple JFrame to display a splash while the game loads
- *
- */
-
 @SuppressWarnings("serial")
 public class Splash extends JFrame
 {
@@ -26,6 +18,7 @@ public class Splash extends JFrame
 		setUndecorated(true);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		setAlwaysOnTop(true);
 		
 		add(this.new Img());
 		
