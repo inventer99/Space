@@ -1,6 +1,5 @@
 package space;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
@@ -19,21 +18,23 @@ public class Player extends PlayableEntity
 	private ArrayList<Image> images = new ArrayList<Image>();
 	private Animation animation;
 	
-	private final int acceleration = 1;
-	private final int maxSpeed = acceleration * 100;
-	private Vector velocity;
+	private final int acceleration = 1; // Acceleration of player
+	private final int maxSpeed = acceleration * 100; // Max Speed of player
+	private Vector velocity; // Player velocity
 	
-	private int chargePower = 0;
+	private int chargePower = 0; // UNKNOWN
 	
 //	private NetFriend f = new NetFriend();
 	
 	public Player()
 	{
+		// Add all ablities
 		for(int i = 0;i < abilitys.length;i++)
 			abilitys[i] = new Ability("res/abilities/bomb.png");
 		
-		velocity = new Vector(0, 0);
+		velocity = new Vector(0, 0); // set velocity to 0
 		
+		// Load player animation
 		try 
 		{
 			images.add(ImageIO.read(new File("res/player/player_1.png")));
@@ -46,25 +47,27 @@ public class Player extends PlayableEntity
 			e.printStackTrace();
 		}
 		
+		// Set animation
 		animation = new Animation(1000/4, images.size());
 		
+		// Add object to Game Engine
 		PixGen.addUpdateableObject(this);
 	}
 	
 	public void update() 
 	{	
-		if(PixGen.getInputManager().keyDown(Settings.KEY_UP))
+		if(PixGen.getInputManager().keyDown(Settings.KEY_UP)) // Subtract accel from velocity Y
 			velocity.sub(new Vector(0, acceleration));
-		if(PixGen.getInputManager().keyDown(Settings.KEY_DOWN))
+		if(PixGen.getInputManager().keyDown(Settings.KEY_DOWN)) // Add accel to velocity Y
 			velocity.add(new Vector(0, acceleration));
-		if(PixGen.getInputManager().keyDown(Settings.KEY_RIGHT))
+		if(PixGen.getInputManager().keyDown(Settings.KEY_RIGHT)) // Add accel to velocity X
 			velocity.add(new Vector(acceleration, 0));
-		if(PixGen.getInputManager().keyDown(Settings.KEY_LEFT))
+		if(PixGen.getInputManager().keyDown(Settings.KEY_LEFT)) // Subtract accel from velocity X
 			velocity.sub(new Vector(acceleration, 0));
 		
-		if(PixGen.getInputManager().keyDown(Settings.KEY_STOP))
+		if(PixGen.getInputManager().keyDown(Settings.KEY_STOP)) // If stop key is down
 		{
-			Vector cancel = new Vector(
+			Vector cancel = new Vector( // Create a new Vector to cancel the movement
 					velocity.getX() == 0
 					? 0 :
 					(
@@ -85,16 +88,16 @@ public class Player extends PlayableEntity
 				velocity.mul(new Vector(0, 0));
 		}
 		
-		if(velocity.getLength() > maxSpeed)
+		if(velocity.getLength() > maxSpeed) // Normalize Vector & Set max speed
 		{
 			velocity.normalize();
 			velocity.mul(new Vector(maxSpeed, maxSpeed));
 		}
 		
-		getPosition().add(velocity);
-		PixGen.setViewPoint(getPosition());
+		getPosition().add(velocity);  // Change entity position by velocity
+		PixGen.setViewPoint(getPosition()); // Set Game Engine viewpoint
 			
-		super.update();
+		super.update(); // Call super.update;
 		
 		chargePower++;
 		if(chargePower == 60)
@@ -122,7 +125,7 @@ public class Player extends PlayableEntity
 			}
 		}
 		
-		animation.update();
+		animation.update(); // Update animation
 		
 		
 //		if(Settings.NET_JOINING)
@@ -156,8 +159,5 @@ public class Player extends PlayableEntity
 	{
 		Image i = images.get(animation.getIndex());
 		super.RenderImageCenter(g, i, 3);
-		g.setColor(Color.GREEN);
-		g.drawLine(200, 200, Math.round(200 + velocity.getX()), Math.round(200 + velocity.getY()));
-		g.drawOval(100, 100, 200, 200);
 	}
 }

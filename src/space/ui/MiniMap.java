@@ -83,6 +83,6 @@ public class MiniMap
 			g.fillRect(x + 3, y + 62, 120, 1);
 			g.fillRect(x + 62, y + 3, 1, 120);
 			g.setColor(Gui.colorText);
-			g.drawString("X: " + Math.round(PixGen.getViewPoint().getX()) + " Y: " + Math.round(PixGen.getViewPoint().getY()), x, y + 140);
+			g.drawString("X: " + Math.round(-PixGen.getViewPoint().getX()) + " Y: " + Math.round(-PixGen.getViewPoint().getY()), x, y + 140);
 		}
 	}
