@@ -13,19 +13,14 @@ public class FollowAI implements AI
 		return true;
 	}
 	
-	private int holdTimeXp;
-	private int holdTimeXm;
-	private int holdTimeYp;
-	private int holdTimeYm;
+	private final int acceleration = 1;
+	private final int maxSpeed = acceleration * 100;
+	private Vector velocity = new Vector(0, 0);
 	
 	private int updatePP = 61;
 	private Vector playerPos;
-	private Vector startPos = new Vector(0, 0);
-	private Vector startDist;
-	private Vector currentDist;
-	private float hStartDistX, hStartDistY;
 	
-	private boolean goUp, goDown, goLeft, goRight;
+	private boolean goUp, goRight;
 	
 	@Override
 	public void update(Entity e) 
@@ -34,101 +29,65 @@ public class FollowAI implements AI
 		if(updatePP > 60)
 		{
 			playerPos = ((Main) PixGen.getGame()).getPlayer().getPosition();
-			currentDist = new Vector(playerPos.getX() - e.getPosition().getX(), playerPos.getY() - e.getPosition().getY());
-			startDist = new Vector(playerPos.getX() - startPos.getX(), playerPos.getY() - startPos.getY());
-			hStartDistX = startDist.getX() / 2;
-			hStartDistY = startDist.getY() / 2;
 			updatePP = 0;
 		}
 	
-		if(currentDist.getY() > hStartDistY) 
+		if(e.getPosition().getY() > playerPos.getY()) 
  		{
 			goUp = true;
-			goDown = false;
 		} 
 		else
  		{
 			goUp = false;
-			goDown = true;
 		} 
 		
-		if(currentDist.getX() > hStartDistX) 
+		if(e.getPosition().getX() > playerPos.getX()) 
  		{
-			goLeft = true;
 			goRight = false;
 		} 
 		else
  		{
-			goLeft = false;
 			goRight = true;
 		} 
 		
-		if(goUp) //UP
+		if(goUp)
+			velocity.sub(new Vector(0, acceleration));
+		if(!goUp)
+			velocity.add(new Vector(0, acceleration));
+		if(goRight)
+			velocity.add(new Vector(acceleration, 0));
+		if(!goRight)
+			velocity.sub(new Vector(acceleration, 0));
+		
+//		if(PixGen.getInputManager().keyDown(Settings.KEY_STOP))
+//		{
+//			Vector cancel = new Vector(
+//					velocity.getX() == 0
+//					? 0 :
+//					(
+//						(velocity.getX() > 0)
+//						? acceleration : -acceleration
+//					), 
+//					velocity.getY() == 0
+//					? 0 :
+//					(
+//						(velocity.getY() > 0)
+//						? acceleration : -acceleration
+//					)
+//			);
+//			velocity.sub(cancel);
+//			
+//			// Remove any left over values from Normalization
+//			if(velocity.getLength() < 1)
+//				velocity.mul(new Vector(0, 0));
+//		}
+		
+		if(velocity.getLength() > maxSpeed)
 		{
-			e.getPosition().add(new Vector(0, 5 + (float) (holdTimeYp * 0.1)));
-			if(holdTimeYm > 0) holdTimeYm--;
-			else holdTimeYp++;
-		}
-		if(goDown) //DOWN
-		{
-			e.getPosition().add(new Vector(0, -5 - (float) (holdTimeYm * 0.1)));
-			if(holdTimeYp > 0) holdTimeYp--;
-			else holdTimeYm++;
-		}
-		if(goLeft) //LEFT
-		{
-			e.getPosition().add(new Vector(5 + (float) (holdTimeXp * 0.1), 0));
-			if(holdTimeXm > 0)holdTimeXm--;
-			else holdTimeXp++;
-		}
-		if(goRight) //RIGHT
-		{
-			e.getPosition().add(new Vector(-5 - (float) (holdTimeXm * 0.1), 0));
-			if(holdTimeXp > 0) holdTimeXp--;
-			else holdTimeXm++;
+			velocity.normalize();
+			velocity.mul(new Vector(maxSpeed, maxSpeed));
 		}
 		
-		if(holdTimeXm >= 0 && !goLeft)
-		{
-			e.getPosition().add(new Vector(-5 - (float) (holdTimeXm * 0.1), 0));
-		}
-		if(holdTimeXp >= 0 && !goRight)
-		{
-			e.getPosition().add(new Vector(5 + (float) (holdTimeXp * 0.1), 0));
-		}
-		if(holdTimeYp >= 0 && !goUp)
-		{
-			e.getPosition().add(new Vector(0, 5 + (float) (holdTimeYp * 0.1)));
-		}
-		if(holdTimeYm >= 0 && !goDown)
-		{
-			e.getPosition().add(new Vector(0, -5 - (float) (holdTimeYm * 0.1)));
-		}
-		
-		if(holdTimeXp > 1000) holdTimeXp = 1000;
-		if(holdTimeXm > 1000) holdTimeXm = 1000;
-		if(holdTimeYp > 1000) holdTimeYp = 1000;
-		if(holdTimeYm > 1000) holdTimeYm = 1000;
-		
-		if(holdTimeXp < 0) 
-		{
-			startPos = e.getPosition();
-			holdTimeXp = 0;
-		}
-		if(holdTimeXm < 0) 
-		{
-			startPos = e.getPosition();
-			holdTimeXm = 0;
-		}
-		if(holdTimeYp < 0) 
-		{
-			startPos = e.getPosition();
-			holdTimeYp = 0;
-		}
-		if(holdTimeYm < 0) 
-		{
-			startPos = e.getPosition();
-			holdTimeYm = 0;
-		}
+		e.getPosition().add(velocity);
 	}
 }

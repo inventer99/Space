@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 
 import pixgen.Game;
 import pixgen.Settings;
+import pixgen.Vector;
+import space.Enemy;
 import space.Player;
 import space.World;
 import space.body.StarBack;
@@ -68,11 +70,11 @@ public class Main extends Game
 		
 		player = new Player();
 		
-//		Enemy e1 = new Enemy();
-//		e1.setPosition(new Vector(300, 300));
+		Enemy e1 = new Enemy();
+		e1.setPosition(new Vector(300, 300));
 		
 //		new Gui();
-		
+			
 		splash.Delete();
 	}
 	
