@@ -39,4 +39,9 @@ public class Territory extends Entity
 	{
 		return team;
 	}
+	
+	public void setTeam(Team team)
+	{
+		this.team = team;
+	}
 }

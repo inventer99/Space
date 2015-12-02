@@ -2,6 +2,8 @@ package space;
 
 public class PlayableEntity extends Entity
 {
+	protected Team team;
+	
 	protected int health = 100;
 	protected int shield = 100;
 	protected int power = 100;
@@ -46,5 +48,15 @@ public class PlayableEntity extends Entity
 	public void setAbilitys(Ability[] abilitys) 
 	{
 		this.abilitys = abilitys;
+	}
+	
+	public Team getTeam()
+	{
+		return team;
+	}
+	
+	public void setTeam(Team team)
+	{
+		this.team = team;
 	}
 }

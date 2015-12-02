@@ -5,15 +5,9 @@ import java.awt.Graphics2D;
 
 import pixgen.PixGen;
 
-public class Friend extends Entity
+public class Friend extends PlayableEntity
 {
 	private String username = "";
-	
-	private int health = 100;
-	private int shield = 100;
-	private int power = 100;
-	
-	private Ability[] abilitys = new Ability[20];
 	
 	public Friend()
 	{	
@@ -30,46 +24,6 @@ public class Friend extends Entity
 	public void render(Graphics2D g)
 	{
 		((Graphics) g).drawImage(PixGen.getImageManager().getImage("friend"), Math.round(getRenderpos().getX()), Math.round(getRenderpos().getY()), 90, 120, null);
-	}
-	
-	public int getHealth() 
-	{
-		return health;
-	}
-
-	public void setHealth(int health) 
-	{
-		this.health = health;
-	}
-
-	public int getShield() 
-	{
-		return shield;
-	}
-
-	public void setShield(int shield) 
-	{
-		this.shield = shield;
-	}
-
-	public int getPower() 
-	{
-		return power;
-	}
-
-	public void setPower(int power) 
-	{
-		this.power = power;
-	}
-
-	public Ability[] getAbilitys() 
-	{
-		return abilitys;
-	}
-
-	public void setAbilitys(Ability[] abilitys) 
-	{
-		this.abilitys = abilitys;
 	}
 
 	public String getUsername() 

@@ -143,6 +143,7 @@ public class Player extends PlayableEntity
 //		}
 	}
 
+	//TODO: move Hit method to PlayableEntity
 	public void Hit()
 	{
 		shield--;

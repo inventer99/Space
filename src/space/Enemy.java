@@ -15,16 +15,10 @@ import space.ai.AI;
 import space.ai.AttackAI;
 import space.ai.FollowAI;
 
-public class Enemy extends Entity
+public class Enemy extends PlayableEntity
 {
 	private ArrayList<Image> images = new ArrayList<Image>();
 	private Animation animation;
-	
-	private int health = 100;
-	private int shield = 100;
-	private int power = 100;
-	
-	private Ability[] abilitys = new Ability[20];
 	
 //	private boolean tmp = false;
 	
@@ -93,45 +87,5 @@ public class Enemy extends Entity
 	public void render(Graphics2D g)
 	{
 		((Graphics) g).drawImage(images.get(animation.getIndex()), Math.round(getRenderpos().getX()), Math.round(getRenderpos().getY()), 90, 120, null);
-	}
-	
-	public int getHealth() 
-	{
-		return health;
-	}
-
-	public void setHealth(int health) 
-	{
-		this.health = health;
-	}
-
-	public int getShield() 
-	{
-		return shield;
-	}
-
-	public void setShield(int shield) 
-	{
-		this.shield = shield;
-	}
-
-	public int getPower() 
-	{
-		return power;
-	}
-
-	public void setPower(int power) 
-	{
-		this.power = power;
-	}
-
-	public Ability[] getAbilitys() 
-	{
-		return abilitys;
-	}
-
-	public void setAbilitys(Ability[] abilitys) 
-	{
-		this.abilitys = abilitys;
 	}
 }
