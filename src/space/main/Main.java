@@ -4,9 +4,11 @@ import static pixgen.PixGen.getClient;
 import static pixgen.PixGen.getServer;
 import static pixgen.PixGen.startGame;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 
 import pixgen.Game;
+import pixgen.PixGen;
 import pixgen.Settings;
 import pixgen.Vector;
 import space.Enemy;
@@ -14,6 +16,7 @@ import space.Player;
 import space.World;
 import space.body.StarBack;
 import space.net.shared.TestConnectionHandler;
+import space.ui.Gui;
 
 public class Main extends Game
 {
@@ -21,6 +24,7 @@ public class Main extends Game
 	
 	private Player player;
 	private World world;
+	private Enemy enemy;
 	
 	public Player getPlayer()
 	{
@@ -70,10 +74,10 @@ public class Main extends Game
 		
 		player = new Player();
 		
-		Enemy e1 = new Enemy();
-		e1.setPosition(new Vector(300, 300));
+		enemy = new Enemy();
+		enemy.setPosition(new Vector(300, 300));
 		
-//		new Gui();
+		new Gui();
 			
 		splash.Delete();
 	}
@@ -82,7 +86,48 @@ public class Main extends Game
 	public void update() {}
 	
 	@Override
-	public void render(Graphics2D g) {}
+	public void render(Graphics2D g) {
+		g.setColor(Color.GREEN);
+		{
+			int x = 10;
+			int y = 10;
+			g.drawString("VeiwPoint:", x, y + 0);
+			g.drawString("X: " + PixGen.getViewPoint().getX(), x, y + 10);
+			g.drawString("Y: " + PixGen.getViewPoint().getY(), x, y + 20);
+		}
+		
+		{
+			int x = 10;
+			int y = 40;
+			g.drawString("Player:", x, y + 0);
+			g.drawString("X: " + player.getPosition().getX(), x, y + 10);
+			g.drawString("Y: " + player.getPosition().getY(), x, y + 20);
+		}
+		
+		{
+			int x = 10;
+			int y = 70;
+			g.drawString("Player_Renderpos:", x, y + 0);
+			g.drawString("X: " + player.getRenderpos().getX(), x, y + 10);
+			g.drawString("Y: " + player.getRenderpos().getY(), x, y + 20);
+		}
+		
+		{
+			int x = 150;
+			int y = 10;
+			g.drawString("Settings_ScreenSize:", x, y + 0);
+			g.drawString("Width: " + Settings.WIDTH, x, y + 10);
+			g.drawString("Height: " + Settings.HEIGHT, x, y + 20);
+		}
+		
+		{
+			int x = 150;
+			int y = 40;
+			g.drawString("Settings_(Half)ScreenSize:", x, y + 0);
+			g.drawString("Width: " + Settings.WIDTH / 2, x, y + 10);
+			g.drawString("Height: " + Settings.HEIGHT / 2, x, y + 20);
+		}
+	}
 
 	@Override
 	public void destroy() {}

@@ -1,8 +1,11 @@
 package space;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 
 import pixgen.PixGen;
+import pixgen.Settings;
 import pixgen.Updateable;
 import pixgen.Vector;
 
@@ -23,8 +26,8 @@ public class Entity implements Updateable
 	public void update() 
 	{
 		renderpos = new Vector(
-				PixGen.getViewPoint().getX() + position.getX(), 
-				PixGen.getViewPoint().getY() + position.getY()
+				PixGen.getViewPoint().getX() + position.getX() + (Settings.WIDTH / 2), 
+				PixGen.getViewPoint().getY() + position.getY() + (Settings.HEIGHT / 2)
 		);
 	}
 
@@ -32,6 +35,21 @@ public class Entity implements Updateable
 	public void render(Graphics2D g) 
 	{
 		
+	}
+	
+	public void RenderImageCenter(Graphics2D g, Image i, int scale)
+	{
+		int width = i.getWidth(null) * scale;
+		int height = i.getHeight(null) * scale;
+		
+		((Graphics) g).drawImage(
+				i, 
+				Math.round(getRenderpos().getX()) - (width / 2), 
+				Math.round(getRenderpos().getY()) - (height / 2), 
+				width, 
+				height, 
+				null
+		);
 	}
 
 	public Vector getPosition() 

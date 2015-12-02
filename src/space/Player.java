@@ -1,7 +1,6 @@
 package space;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
@@ -33,7 +32,6 @@ public class Player extends PlayableEntity
 		for(int i = 0;i < abilitys.length;i++)
 			abilitys[i] = new Ability("res/abilities/bomb.png");
 		
-//		this.setPosition(new Vector((Settings.WIDTH / 2) - 45, (Settings.HEIGHT / 2) - 60));
 		velocity = new Vector(0, 0);
 		
 		try 
@@ -156,7 +154,8 @@ public class Player extends PlayableEntity
 	
 	public void render(Graphics2D g)
 	{
-		((Graphics) g).drawImage(images.get(animation.getIndex()), Math.round(getRenderpos().getX()), Math.round(getRenderpos().getY()), 90, 120, null);
+		Image i = images.get(animation.getIndex());
+		super.RenderImageCenter(g, i, 3);
 		g.setColor(Color.GREEN);
 		g.drawLine(200, 200, Math.round(200 + velocity.getX()), Math.round(200 + velocity.getY()));
 		g.drawOval(100, 100, 200, 200);

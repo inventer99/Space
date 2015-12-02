@@ -86,6 +86,6 @@ public class Enemy extends PlayableEntity
 
 	public void render(Graphics2D g)
 	{
-		((Graphics) g).drawImage(images.get(animation.getIndex()), Math.round(getRenderpos().getX()), Math.round(getRenderpos().getY()), 90, 120, null);
+		super.RenderImageCenter(g, images.get(animation.getIndex()), 3);
 	}
 }

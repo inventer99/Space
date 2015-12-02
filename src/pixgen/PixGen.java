@@ -45,8 +45,6 @@ public class PixGen implements Runnable
 		
 		objects = new ArrayList<Updateable>();
 		
-		objects.add(game);
-		
 		t.start();
 	}
 	
@@ -55,6 +53,7 @@ public class PixGen implements Runnable
 	public void run() 
 	{
 		game.init();
+		objects.add(game);
 		
 		while(running)
 		{

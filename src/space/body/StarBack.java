@@ -45,8 +45,12 @@ public class StarBack extends Entity
 	}
 	
 	public void update()
-	{		
-		setPosition(PixGen.getViewPoint());
+	{
+		//TODO: Make edges outside of screen
+		setPosition(new Vector(
+				PixGen.getViewPoint().getX() - (Settings.WIDTH / 2),
+				PixGen.getViewPoint().getY() - (Settings.HEIGHT / 2)
+		));
 		super.update();
 		for(Vector v : points)
 		{

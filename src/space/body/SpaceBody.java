@@ -1,6 +1,5 @@
 package space.body;
 
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
@@ -27,7 +26,7 @@ public class SpaceBody extends Entity
 	public void render(Graphics2D g)
 	{
 		Image image = PixGen.getImageManager().getImage(getRenderkey());
-		((Graphics) g).drawImage(image, Math.round(getRenderpos().getX() - image.getWidth(null) * 3 / 2), Math.round(getRenderpos().getY() - image.getHeight(null) * 3 / 2), image.getWidth(null) * 3, image.getHeight(null) * 3, null);
+		super.RenderImageCenter(g, image, 3);
 	}
 
 	public String getRenderkey() 
